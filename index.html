@@ -2,157 +2,44 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>KeyFixer - תיקון הקלדה </title>
+  <title>תנאי שימוש - KeyFixer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
       background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-    }
-    .logo {
-      margin-top: 32px;
-      margin-bottom: 0;
-      width: 208px; /* מוגדל ב־30% */
-      max-width: 60vw;
-      height: auto;
-      display: block;
-    }
-    .logo-gap {
-      height: 5.1em; /* מוקטן ב־40% */
-      width: 100%;
-      display: block;
-      content: "";
-    }
-    .subtitle {
-      margin-bottom: 18px;
-      color: #444;
-      font-size: 1.08em;
-    }
-    .boxes-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 340px;
-      max-width: 96vw;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    textarea,
-    #resultBox {
-      width: 100%;
-      font-size: 1.2em;
-      border-radius: 8px;
-      border: 2.5px solid #0d3364;
-      box-sizing: border-box;
-      padding: 10px;
-      background: #fff;
-    }
-    textarea {
-      height: 60px;
-      resize: none;
-      direction: ltr;
-      text-align: left;
-      margin-bottom: 0;
-    }
-    #resultBox {
-      min-height: 40px;
-      background: #fff;
-      color: #222;
-      word-break: break-word;
-      text-align: right;
+      color: #111;
       direction: rtl;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
     }
-    .magic-btn-container {
-      width: 100%;
-      display: flex;
-      justify-content: center;
+    h1 {
+      text-align: center;
+      color: #1565c0;
     }
-    .magic-btn {
-      font-size: 1.08em;
-      padding: 7px 24px;
-      border: none;
-      border-radius: 6px;
-      background: #1565c0;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.2s;
-      box-shadow: 0 1.5px 7px #0001;
-    }
-    .magic-btn:active {
-      background: #0d47a1;
-    }
-    .footer {
-      margin-top: auto;
-      margin-bottom: 9.6px; /* מוקטן ב־40% */
-      color: #888;
-      font-size: 0.95em;
-    }
-    @media (max-width: 500px) {
-      .boxes-container {
-        width: 92vw;
-      }
-      .logo {
-        width: 60vw;
-        max-width: 200px;
-      }
+    a {
+      color: #1565c0;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAOVBMVEX///8AAADf398QEBAcHBzc3Nz09PTj4+N/f3////9bW1v4+Pju7u7Z2dn5+fl7e3vy8vLW1taSkpKi4T0nAAABGklEQVR4nO3QsQ3CQBCF4eNoGDCLqP//zrs0YMF2d2zcp7G5wL+vdPb1PdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91fdX3V91ffX/Ev/PXAkL4M8AAAAASUVORK5CYII=" alt="KeyFixer logo" class="logo">
-  <div class="logo-gap"></div>
-  <div class="subtitle">מתקן טעויות מהמצאת המקלדת</div>
-  <div class="boxes-container">
-    <textarea id="inputText" placeholder="הדבק את הטקסט"></textarea>
-    <div class="magic-btn-container">
-      <button class="magic-btn" onclick="fixText()">!fix it</button>
-    </div>
-    <div id="resultBox"></div>
-    <div class="magic-btn-container" style="margin-top: 8px;">
-      <button class="magic-btn" onclick="copyResult()">📋 העתק</button>
-    </div>
-  </div>
-  <div class="footer">קוד פתוח · <a href="https://github.com/david33266/KeyFixer" target="_blank" style="color:#1565c0;text-decoration:none;">GitHub</a></div>
 
-  <script>
-    const engToHebMap = {
-      'a': 'ש', 'b': 'נ', 'c': 'ב', 'd': 'ג', 'e': 'ק', 'f': 'כ', 'g': 'ע', 'h': 'י',
-      'i': 'ן', 'j': 'ח', 'k': 'ל', 'l': 'ך', 'm': 'צ', 'n': 'מ', 'o': 'ם', 'p': 'פ',
-      'q': '/', 'r': 'ר', 's': 'ד', 't': 'א', 'u': 'ו', 'v': 'ה', 'w': '\'', 'x': 'ס',
-      'y': 'ט', 'z': 'ז',
-      'A': 'ש', 'B': 'נ', 'C': 'ב', 'D': 'ג', 'E': 'ק', 'F': 'כ', 'G': 'ע', 'H': 'י',
-      'I': 'ן', 'J': 'ח', 'K': 'ל', 'L': 'ך', 'M': 'צ', 'N': 'מ', 'O': 'ם', 'P': 'פ',
-      'Q': '/', 'R': 'ר', 'S': 'ד', 'T': 'א', 'U': 'ו', 'V': 'ה', 'W': '\'', 'X': 'ס',
-      'Y': 'ט', 'Z': 'ז',
-      ',': 'ת', '.': 'ץ', ';': 'ף', '[': ']', ']': '[', '\\': '\\'
-    };
+  <h1>תנאי שימוש</h1>
 
-    function fixText() {
-      const input = document.getElementById('inputText').value;
-      let output = '';
-      for (const char of input) {
-        output += engToHebMap.hasOwnProperty(char) ? engToHebMap[char] : char;
-      }
-      document.getElementById('resultBox').textContent = output;
-    }
+  <p>ברוכים הבאים ל־<strong>KeyFixer</strong>.</p>
 
-    function copyResult() {
-      const resultBox = document.getElementById('resultBox');
-      const text = resultBox.textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("הטקסט הועתק!");
-      }).catch(() => {
-        alert("שגיאה בהעתקה");
-      });
-    }
-  </script>
-</body>
-</html>
+  <p>השימוש בכלי זה כפוף לתנאים הבאים:</p>
+
+  <ul>
+    <li>השימוש באתר הוא אישי, זמני ולמטרות לא מסחריות בלבד.</li>
+    <li>אין להעתיק, לשכפל, להפיץ, לפרסם או לעשות כל שימוש מסחרי בתוכן, בעיצוב או בקוד האתר – ללא אישור מראש ובכתב מבעל הזכויות.</li>
+    <li>השימוש נעשה באחריות המשתמש בלבד. אין אחריות לתוצאות, דיוק ההמרה, או לנזקים כלשהם – ישירים או עקיפים – שעלולים להיגרם כתוצאה מהשימוש באתר.</li>
+    <li>האתר נועד לסייע בהמרת טקסטים שנכתבו בפריסת מקלדת שגויה (למשל: עברית באנגלית), ואינו מיועד למטרות בלתי חוקיות.</li>
+    <li>השירות ניתן "כמות שהוא" (as-is), וייתכנו בו באגים או טעויות.</li>
+  </ul>
+
+  <p>על תנאים אלו חלים דיני מדינת ישראל, וכל מחלוקת תתברר בבתי המשפט המוסמכים באזור תל אביב בלבד.</p>
+
+  <p>לשאלות או פ
