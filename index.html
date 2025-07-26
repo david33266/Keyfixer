@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">https://github.com/david33266/Keyfixer/blob/main/index.html
+  <meta charset="UTF-8">
   <title>KeyFixer - תיקון פריסת מקלדת</title>
-  <link rel="icon" type="image/png" href="logo.png">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,7 +23,7 @@
       display: block;
     }
     .logo-gap {
-      height: 8.5em; /* approx. 5 lines of text (1.7em per line) */
+      height: 8.5em;
       width: 100%;
       display: block;
       content: "";
@@ -46,10 +45,9 @@
     textarea,
     #resultBox {
       width: 100%;
-      min-width: 0;
       font-size: 1.2em;
       border-radius: 8px;
-      border: 2.5px solid #0d3364; /* thicker, dark blue border */
+      border: 2.5px solid #0d3364;
       box-sizing: border-box;
       padding: 10px;
       background: #fff;
@@ -63,11 +61,9 @@
     }
     #resultBox {
       min-height: 40px;
-      min-width: 0;
       background: #fff;
       color: #222;
-      margin-bottom: 0;
-      word-break: break-all;
+      word-break: break-word;
       text-align: right;
       direction: rtl;
       display: flex;
@@ -78,21 +74,16 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      margin: 0;
     }
     .magic-btn {
       font-size: 1.08em;
-      padding: 7px 24px 7px 18px;
+      padding: 7px 24px;
       border: none;
       border-radius: 6px;
       background: #1565c0;
       color: #fff;
       cursor: pointer;
       transition: background 0.2s;
-      margin: 0 0 0 0;
-      display: inline-flex;
-      align-items: center;
-      letter-spacing: 0.5px;
       box-shadow: 0 1.5px 7px #0001;
     }
     .magic-btn:active {
@@ -100,59 +91,4 @@
     }
     .footer {
       margin-top: auto;
-      margin-bottom: 16px;
-      color: #888;
-      font-size: 0.95em;
-    }
-    @media (max-width: 500px) {
-      .boxes-container {
-        width: 92vw;
-        min-width: 0;
-      }
-      .logo {
-        width: 60vw;
-        max-width: 200px;
-      }
-    }
-  </style>
-  <meta property="og:image" content="logo2.png">
-</head>
-<body>
- <img src="logo.png" ... >
-<div class="logo-gap"></div>
-  <div class="subtitle">מתקן טעויות מאז המצאת המקלדת</div>
-  <div class="boxes-container">
-    <textarea id="inputText" placeholder="הדבק את הטקסט"></textarea>
-    <div class="magic-btn-container">
-      <button class="magic-btn" onclick="fixText()">
-        fix it!
-      </button>
-    </div>
-    <div id="resultBox"></div>
-  </div>
-  <div class="footer">· <a href="https://github.com/david33266/KeyFixer" target="_blank" style="color:#1565c0;text-decoration:none;">GitHub</a></div>
-  <script>
-    // אנגלית → עברית לפי פריסת מקלדת QWERTY
-    const engToHebMap = {
-      'a': 'ש', 'b': 'נ', 'c': 'ב', 'd': 'ג', 'e': 'ק', 'f': 'כ', 'g': 'ע', 'h': 'י',
-      'i': 'ן', 'j': 'ח', 'k': 'ל', 'l': 'ך', 'm': 'צ', 'n': 'מ', 'o': 'ם', 'p': 'פ',
-      'q': '/', 'r': 'ר', 's': 'ד', 't': 'א', 'u': 'ו', 'v': 'ה', 'w': '\'', 'x': 'ס',
-      'y': 'ט', 'z': 'ז',
-      'A': 'ש', 'B': 'נ', 'C': 'ב', 'D': 'ג', 'E': 'ק', 'F': 'כ', 'G': 'ע', 'H': 'י',
-      'I': 'ן', 'J': 'ח', 'K': 'ל', 'L': 'ך', 'M': 'צ', 'N': 'מ', 'O': 'ם', 'P': 'פ',
-      'Q': '/', 'R': 'ר', 'S': 'ד', 'T': 'א', 'U': 'ו', 'V': 'ה', 'W': '\'', 'X': 'ס',
-      'Y': 'ט', 'Z': 'ז',
-      ',': 'ת', '.': 'ץ', ';': 'ף', '[': ']', ']': '[', '\\': '\\'
-    };
-
-    function fixText() {
-      const input = document.getElementById('inputText').value;
-      let output = '';
-      for (const char of input) {
-        output += engToHebMap.hasOwnProperty(char) ? engToHebMap[char] : char;
-      }
-      document.getElementById('resultBox').textContent = output;
-    }
-  </script>
-</body>
-</html>
+      margin-
