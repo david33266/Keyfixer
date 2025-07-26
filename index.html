@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>KeyFixer -  תיקון הקלדה </title>
+  <title>KeyFixer - תיקון הקלדה </title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,13 +17,13 @@
     .logo {
       margin-top: 32px;
       margin-bottom: 0;
-      width: 208px;
+      width: 208px; /* מוגדל ב־30% */
       max-width: 60vw;
       height: auto;
       display: block;
     }
     .logo-gap {
-      height: 5.1em;
+      height: 5.1em; /* מוקטן ב־40% */
       width: 100%;
       display: block;
       content: "";
@@ -91,14 +91,9 @@
     }
     .footer {
       margin-top: auto;
-      margin-bottom: 9.6px;
+      margin-bottom: 9.6px; /* מוקטן ב־40% */
       color: #888;
       font-size: 0.95em;
-    }
-    .footer a {
-      color: #1565c0;
-      text-decoration: none;
-      margin-inline: 6px;
     }
     @media (max-width: 500px) {
       .boxes-container {
@@ -125,12 +120,39 @@
       <button class="magic-btn" onclick="copyResult()">📋 העתק</button>
     </div>
   </div>
-  <div class="footer">
-    קוד פתוח · 
-    <a href="https://github.com/david33266/KeyFixer" target="_blank">GitHub</a> · 
-    <a href="terms.html">תנאי שימוש</a>
-  </div>
+  <div class="footer">קוד פתוח · <a href="https://github.com/david33266/KeyFixer" target="_blank" style="color:#1565c0;text-decoration:none;">GitHub</a></div>
 
   <script>
     const engToHebMap = {
-      'a': '
+      'a': 'ש', 'b': 'נ', 'c': 'ב', 'd': 'ג', 'e': 'ק', 'f': 'כ', 'g': 'ע', 'h': 'י',
+      'i': 'ן', 'j': 'ח', 'k': 'ל', 'l': 'ך', 'm': 'צ', 'n': 'מ', 'o': 'ם', 'p': 'פ',
+      'q': '/', 'r': 'ר', 's': 'ד', 't': 'א', 'u': 'ו', 'v': 'ה', 'w': '\'', 'x': 'ס',
+      'y': 'ט', 'z': 'ז',
+      'A': 'ש', 'B': 'נ', 'C': 'ב', 'D': 'ג', 'E': 'ק', 'F': 'כ', 'G': 'ע', 'H': 'י',
+      'I': 'ן', 'J': 'ח', 'K': 'ל', 'L': 'ך', 'M': 'צ', 'N': 'מ', 'O': 'ם', 'P': 'פ',
+      'Q': '/', 'R': 'ר', 'S': 'ד', 'T': 'א', 'U': 'ו', 'V': 'ה', 'W': '\'', 'X': 'ס',
+      'Y': 'ט', 'Z': 'ז',
+      ',': 'ת', '.': 'ץ', ';': 'ף', '[': ']', ']': '[', '\\': '\\'
+    };
+
+    function fixText() {
+      const input = document.getElementById('inputText').value;
+      let output = '';
+      for (const char of input) {
+        output += engToHebMap.hasOwnProperty(char) ? engToHebMap[char] : char;
+      }
+      document.getElementById('resultBox').textContent = output;
+    }
+
+    function copyResult() {
+      const resultBox = document.getElementById('resultBox');
+      const text = resultBox.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("הטקסט הועתק!");
+      }).catch(() => {
+        alert("שגיאה בהעתקה");
+      });
+    }
+  </script>
+</body>
+</html>
