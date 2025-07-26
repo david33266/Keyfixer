@@ -2,93 +2,113 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>KeyFixer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="logo.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KeyFixer - תיקון שגיאות מקלדת</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 20px;
       margin: 0;
+      padding: 0;
+      background-color: #fdfdfd;
     }
 
-    .logo {
+    img.logo {
       margin-top: 32px;
-      margin-bottom: 0;
-      width: 208px; /* מוגדל ב-30% מ-160 */
-      max-width: 60vw;
+      width: 208px; /* מוגדל ב-30% */
       height: auto;
       display: block;
       margin-left: auto;
       margin-right: auto;
     }
 
+    .logo-gap {
+      margin-bottom: 12px;
+    }
+
     .subtitle {
-      font-size: 1.2em;
-      margin-bottom: 24px; /* הופחת ב-40% מ-40 */
+      font-size: 18px;
+      margin-bottom: 20px;
     }
 
     .boxes-container {
-      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px; /* הקטנת רווח ב-40% */
     }
 
     textarea {
-      width: 300px;
-      height: 60px;
+      width: 90%;
+      max-width: 600px;
+      height: 80px;
       font-size: 16px;
+      padding: 10px;
+      margin: 10px auto;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      resize: vertical;
     }
 
     .magic-btn-container {
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     button {
       padding: 8px 16px;
       font-size: 14px;
+      background-color: #0d7680;
+      color: white;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
     }
 
-    .copy-btn {
-      margin-top: 12px;
+    button:hover {
+      background-color: #0b5f6b;
     }
   </style>
 </head>
 <body>
-
-  <img src="logo.png" alt="KeyFixer logo" class="logo" />
-
-  <div class="subtitle">מתקן שגיאות בפריסת המקלדת</div>
+  <img src="logo.png" alt="KeyFixer logo" class="logo"/>
+  <div class="logo-gap"></div>
+  <div class="subtitle">מתקן טעויות כתיבה בעקבות הקלדה בשפה הלא נכונה</div>
 
   <div class="boxes-container">
     <textarea id="inputText" placeholder="הדבק את הטקסט כאן"></textarea>
+    <textarea id="outputText" placeholder="כאן תופיע התוצאה"></textarea>
+
     <div class="magic-btn-container">
-      <button onclick="fixText()">תקן לי!</button>
+      <button onclick="fixText()">Fix it</button>
+      <button onclick="copyText()">📋 העתק</button>
     </div>
-    <textarea id="outputText" placeholder="התוצאה תופיע כאן" readonly></textarea>
-    <br />
-    <button class="copy-btn" onclick="copyToClipboard()">📋 העתק</button>
   </div>
 
   <script>
     function fixText() {
       const input = document.getElementById("inputText").value;
-      const output = convertHebrewToEnglish(input); // לשנות ללוגיקה שלך
-      document.getElementById("outputText").value = output;
+      const output = document.getElementById("outputText");
+      output.value = convertHebrewEnglish(input);
     }
 
-    function copyToClipboard() {
+    function copyText() {
       const output = document.getElementById("outputText");
       output.select();
-      output.setSelectionRange(0, 99999);
       document.execCommand("copy");
     }
 
-    function convertHebrewToEnglish(str) {
-      // דוגמה בלבד – להחליף בלוגיקה של KeyFixer
-      return str.replace(/ש/g, "a").replace(/נ/g, "b").replace(/ב/g, "c");
+    function convertHebrewEnglish(text) {
+      const map = {
+        'q': '/', 'w': "'", 'e': 'ק', 'r': 'ר', 't': 'א', 'y': 'ט', 'u': 'ו', 'i': 'ן', 'o': 'ם', 'p': 'פ',
+        'a': 'ש', 's': 'ד', 'd': 'ג', 'f': 'כ', 'g': 'ע', 'h': 'י', 'j': 'ח', 'k': 'ל', 'l': 'ך', ';': 'ף',
+        'z': 'ז', 'x': 'ס', 'c': 'ב', 'v': 'ה', 'b': 'נ', 'n': 'מ', 'm': 'צ', ',': 'ת', '.': 'ץ',
+        'Q': '/', 'W': '"', 'E': 'ק', 'R': 'ר', 'T': 'א', 'Y': 'ט', 'U': 'ו', 'I': 'ן', 'O': 'ם', 'P': 'פ',
+        'A': 'ש', 'S': 'ד', 'D': 'ג', 'F': 'כ', 'G': 'ע', 'H': 'י', 'J': 'ח', 'K': 'ל', 'L': 'ך', ':': 'ף',
+        'Z': 'ז', 'X': 'ס', 'C': 'ב', 'V': 'ה', 'B': 'נ', 'N': 'מ', 'M': 'צ', '<': 'ת', '>': 'ץ'
+      };
+      return text.split('').map(c => map[c] || c).join('');
     }
   </script>
-
 </body>
 </html>
