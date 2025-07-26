@@ -1,113 +1,158 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>KeyFixer - תיקון שגיאות מקלדת</title>
+  <link rel="icon" type="image/png" href="logo.png">
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin: 0;
       padding: 0;
-      background-color: #fdfdfd;
+      min-height: 100vh;
     }
-
-    img.logo {
+    .logo {
       margin-top: 32px;
-      width: 208px; /* מוגדל ב-30% */
+      margin-bottom: 0;
+      width: 160px;
+      max-width: 60vw;
       height: auto;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
-
     .logo-gap {
-      margin-bottom: 12px;
+      height: 8.5em; /* approx. 5 lines of text (1.7em per line) */
+      width: 100%;
+      display: block;
+      content: "";
     }
-
     .subtitle {
-      font-size: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      color: #444;
+      font-size: 1.08em;
     }
-
     .boxes-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px; /* הקטנת רווח ב-40% */
+      width: 340px;
+      max-width: 96vw;
+      gap: 12px;
+      margin-bottom: 16px;
     }
-
-    textarea {
-      width: 90%;
-      max-width: 600px;
-      height: 80px;
-      font-size: 16px;
-      padding: 10px;
-      margin: 10px auto;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-      resize: vertical;
-    }
-
-    .magic-btn-container {
-      margin-top: 10px;
-    }
-
-    button {
-      padding: 8px 16px;
-      font-size: 14px;
-      background-color: #0d7680;
-      color: white;
-      border: none;
+    textarea,
+    #resultBox {
+      width: 100%;
+      min-width: 0;
+      font-size: 1.2em;
       border-radius: 8px;
-      cursor: pointer;
+      border: 2.5px solid #0d3364; /* thicker, dark blue border */
+      box-sizing: border-box;
+      padding: 10px;
+      background: #fff;
     }
-
-    button:hover {
-      background-color: #0b5f6b;
+    textarea {
+      height: 60px;
+      resize: none;
+      direction: ltr;
+      text-align: left;
+      margin-bottom: 0;
+    }
+    #resultBox {
+      min-height: 40px;
+      min-width: 0;
+      background: #fff;
+      color: #222;
+      margin-bottom: 0;
+      word-break: break-all;
+      text-align: right;
+      direction: rtl;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .magic-btn-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+    }
+    .magic-btn {
+      font-size: 1.08em;
+      padding: 7px 24px 7px 18px;
+      border: none;
+      border-radius: 6px;
+      background: #1565c0;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin: 0 0 0 0;
+      display: inline-flex;
+      align-items: center;
+      letter-spacing: 0.5px;
+      box-shadow: 0 1.5px 7px #0001;
+    }
+    .magic-btn:active {
+      background: #0d47a1;
+    }
+    .footer {
+      margin-top: auto;
+      margin-bottom: 16px;
+      color: #888;
+      font-size: 0.95em;
+    }
+    @media (max-width: 500px) {
+      .boxes-container {
+        width: 92vw;
+        min-width: 0;
+      }
+      .logo {
+        width: 60vw;
+        max-width: 200px;
+      }
     }
   </style>
+  <meta property="og:image" content="logo2.png">
 </head>
 <body>
-  <img src="logo.png" alt="KeyFixer logo" class="logo"/>
+ <<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAAAQACAIAAADwf7zUAADBhGNhQlgAAMGEanVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAANxNqdW1iAAAAR2p1bWRjMm1hAREAEIAAAKoAOJtxA3VybjpjMnBhOmY5ZDc3NDc4LTBiMTUtNDI5Mi1hOWQ3LTg3NzdhNmUxNTY3NQAAAAHhanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2Vy..."  
+     alt="KeyFixer logo" class="logo">
   <div class="logo-gap"></div>
-  <div class="subtitle">מתקן טעויות כתיבה בעקבות הקלדה בשפה הלא נכונה</div>
-
+  <div class="subtitle">מתקן טעויות מאז המצאת המקלדת</div>
   <div class="boxes-container">
-    <textarea id="inputText" placeholder="הדבק את הטקסט כאן"></textarea>
-    <textarea id="outputText" placeholder="כאן תופיע התוצאה"></textarea>
-
+    <textarea id="inputText" placeholder="הדבק את הטקסט"></textarea>
     <div class="magic-btn-container">
-      <button onclick="fixText()">Fix it</button>
-      <button onclick="copyText()">📋 העתק</button>
+      <button class="magic-btn" onclick="fixText()">
+        fix it!
+      </button>
     </div>
+    <div id="resultBox"></div>
   </div>
-
+  <div class="footer">קוד פתוח · <a href="https://github.com/david33266/KeyFixer" target="_blank" style="color:#1565c0;text-decoration:none;">GitHub</a></div>
   <script>
+    // אנגלית → עברית לפי פריסת מקלדת QWERTY
+    const engToHebMap = {
+      'a': 'ש', 'b': 'נ', 'c': 'ב', 'd': 'ג', 'e': 'ק', 'f': 'כ', 'g': 'ע', 'h': 'י',
+      'i': 'ן', 'j': 'ח', 'k': 'ל', 'l': 'ך', 'm': 'צ', 'n': 'מ', 'o': 'ם', 'p': 'פ',
+      'q': '/', 'r': 'ר', 's': 'ד', 't': 'א', 'u': 'ו', 'v': 'ה', 'w': '\'', 'x': 'ס',
+      'y': 'ט', 'z': 'ז',
+      'A': 'ש', 'B': 'נ', 'C': 'ב', 'D': 'ג', 'E': 'ק', 'F': 'כ', 'G': 'ע', 'H': 'י',
+      'I': 'ן', 'J': 'ח', 'K': 'ל', 'L': 'ך', 'M': 'צ', 'N': 'מ', 'O': 'ם', 'P': 'פ',
+      'Q': '/', 'R': 'ר', 'S': 'ד', 'T': 'א', 'U': 'ו', 'V': 'ה', 'W': '\'', 'X': 'ס',
+      'Y': 'ט', 'Z': 'ז',
+      ',': 'ת', '.': 'ץ', ';': 'ף', '[': ']', ']': '[', '\\': '\\'
+    };
+
     function fixText() {
-      const input = document.getElementById("inputText").value;
-      const output = document.getElementById("outputText");
-      output.value = convertHebrewEnglish(input);
-    }
-
-    function copyText() {
-      const output = document.getElementById("outputText");
-      output.select();
-      document.execCommand("copy");
-    }
-
-    function convertHebrewEnglish(text) {
-      const map = {
-        'q': '/', 'w': "'", 'e': 'ק', 'r': 'ר', 't': 'א', 'y': 'ט', 'u': 'ו', 'i': 'ן', 'o': 'ם', 'p': 'פ',
-        'a': 'ש', 's': 'ד', 'd': 'ג', 'f': 'כ', 'g': 'ע', 'h': 'י', 'j': 'ח', 'k': 'ל', 'l': 'ך', ';': 'ף',
-        'z': 'ז', 'x': 'ס', 'c': 'ב', 'v': 'ה', 'b': 'נ', 'n': 'מ', 'm': 'צ', ',': 'ת', '.': 'ץ',
-        'Q': '/', 'W': '"', 'E': 'ק', 'R': 'ר', 'T': 'א', 'Y': 'ט', 'U': 'ו', 'I': 'ן', 'O': 'ם', 'P': 'פ',
-        'A': 'ש', 'S': 'ד', 'D': 'ג', 'F': 'כ', 'G': 'ע', 'H': 'י', 'J': 'ח', 'K': 'ל', 'L': 'ך', ':': 'ף',
-        'Z': 'ז', 'X': 'ס', 'C': 'ב', 'V': 'ה', 'B': 'נ', 'N': 'מ', 'M': 'צ', '<': 'ת', '>': 'ץ'
-      };
-      return text.split('').map(c => map[c] || c).join('');
+      const input = document.getElementById('inputText').value;
+      let output = '';
+      for (const char of input) {
+        output += engToHebMap.hasOwnProperty(char) ? engToHebMap[char] : char;
+      }
+      document.getElementById('resultBox').textContent = output;
     }
   </script>
 </body>
