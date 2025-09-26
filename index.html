@@ -1,8 +1,7 @@
-
-
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-<head> <link rel="icon" type="image/png" href="logo.png">
+<head> 
+  <link rel="icon" type="image/png" href="logo.png">
   <meta charset="UTF-8">
   <title>KeyFixer - תיקון שגיאות מקלדת</title>
   <style>
@@ -28,7 +27,6 @@
       height: 5.1em;
       width: 100%;
       display: block;
-      content: "";
     }
     .subtitle {
       margin-bottom: 18px;
@@ -123,13 +121,13 @@
     const engToHebMap = {
       'a': 'ש', 'b': 'נ', 'c': 'ב', 'd': 'ג', 'e': 'ק', 'f': 'כ', 'g': 'ע', 'h': 'י',
       'i': 'ן', 'j': 'ח', 'k': 'ל', 'l': 'ך', 'm': 'צ', 'n': 'מ', 'o': 'ם', 'p': 'פ',
-      'q': '/', 'r': 'ר', 's': 'ד', 't': 'א', 'u': 'ו', 'v': 'ה', 'w': ''', 'x': 'ס',
+      'q': '/', 'r': 'ר', 's': 'ד', 't': 'א', 'u': 'ו', 'v': 'ה', 'w': "'", 'x': 'ס',
       'y': 'ט', 'z': 'ז',
       'A': 'ש', 'B': 'נ', 'C': 'ב', 'D': 'ג', 'E': 'ק', 'F': 'כ', 'G': 'ע', 'H': 'י',
       'I': 'ן', 'J': 'ח', 'K': 'ל', 'L': 'ך', 'M': 'צ', 'N': 'מ', 'O': 'ם', 'P': 'פ',
-      'Q': '/', 'R': 'ר', 'S': 'ד', 'T': 'א', 'U': 'ו', 'V': 'ה', 'W': ''', 'X': 'ס',
+      'Q': '/', 'R': 'ר', 'S': 'ד', 'T': 'א', 'U': 'ו', 'V': 'ה', 'W': "'", 'X': 'ס',
       'Y': 'ט', 'Z': 'ז',
-      ',': 'ת', '.': 'ץ', ';': 'ף', '[': ']', ']': '[', '\': '\'
+      ',': 'ת', '.': 'ץ', ';': 'ף', '[': ']', ']': '[', '\\': '\\'
     };
     function fixText() {
       const input = document.getElementById('inputText').value;
