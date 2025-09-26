@@ -124,6 +124,7 @@
   <div class="boxes-container">
     <textarea id="inputText" placeholder="הדבק את הטקסט"></textarea>
     <select id="directionSelect" class="direction-select">
+      <option value="auto">אוטומטי</option>
       <option value="engToHeb">אנגלית לעברית</option>
       <option value="hebToEng">עברית לאנגלית</option>
     </select>
@@ -153,9 +154,30 @@
       }
     }
 
+    // פונקציה לבדיקת אם תו הוא עברי
+    function isHebrew(char) {
+      return /[\u0590-\u05FF]/.test(char);
+    }
+
     function fixText() {
       const input = document.getElementById('inputText').value;
-      const direction = document.getElementById('directionSelect').value;
+      const selectedDirection = document.getElementById('directionSelect').value;
+      let direction = selectedDirection;
+      
+      // אם אוטומטי, זיהוי כיוון
+      if (direction === 'auto') {
+        let hebrewCount = 0;
+        let totalCount = 0;
+        for (const char of input) {
+          if (isHebrew(char)) {
+            hebrewCount++;
+          }
+          totalCount++;
+        }
+        const hebrewRatio = totalCount > 0 ? hebrewCount / totalCount : 0;
+        direction = hebrewRatio > 0.5 ? 'hebToEng' : 'engToHeb'; // אם יותר מ-50% עברי, הפוך; אחרת, אנגלית לעברית
+      }
+
       let output = '';
       let mapToUse = direction === 'engToHeb' ? engToHebMap : hebToEngMap;
 
