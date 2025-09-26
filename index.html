@@ -70,6 +70,17 @@
       align-items: center;
       justify-content: flex-end;
     }
+    .direction-select {
+      width: 100%;
+      font-size: 1em;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 2px solid #0d3364;
+      background: #fff;
+      color: #333;
+      direction: rtl;
+      text-align: right;
+    }
     .magic-btn-container {
       width: 100%;
       display: flex;
@@ -112,6 +123,10 @@
   <div class="subtitle">מתקן טעויות מהמצאת המקלדת</div>
   <div class="boxes-container">
     <textarea id="inputText" placeholder="הדבק את הטקסט"></textarea>
+    <select id="directionSelect" class="direction-select">
+      <option value="engToHeb">אנגלית לעברית</option>
+      <option value="hebToEng">עברית לאנגלית</option>
+    </select>
     <div class="magic-btn-container">
       <button class="magic-btn" onclick="fixText()">!fix it</button>
     </div>
@@ -129,11 +144,23 @@
       'Y': 'ט', 'Z': 'ז',
       ',': 'ת', '.': 'ץ', ';': 'ף', '[': ']', ']': '[', '\\': '\\'
     };
+
+    // בניית מפה הפוכה (עברית לאנגלית) - לוקחת את ראשי התיבות (קטנות) כברירת מחדל
+    const hebToEngMap = {};
+    for (const [eng, heb] of Object.entries(engToHebMap)) {
+      if (!hebToEngMap[heb]) {
+        hebToEngMap[heb] = eng.toLowerCase(); // עדיפות לאות קטנה אם אין כבר
+      }
+    }
+
     function fixText() {
       const input = document.getElementById('inputText').value;
+      const direction = document.getElementById('directionSelect').value;
       let output = '';
+      let mapToUse = direction === 'engToHeb' ? engToHebMap : hebToEngMap;
+
       for (const char of input) {
-        output += engToHebMap.hasOwnProperty(char) ? engToHebMap[char] : char;
+        output += mapToUse.hasOwnProperty(char) ? mapToUse[char] : char;
       }
       document.getElementById('resultBox').textContent = output;
     }
