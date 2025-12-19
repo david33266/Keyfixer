@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_appName__",
+  "version": "1.0.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "permissions": [
+    "contextMenus",
+    "scripting",
+    "clipboardWrite",
+    "storage",
+    "commands"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "iconkf.png"
+    }
+  },
+  "commands": {
+    "fix_text_shortcut": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Fix the selected text"
+    }
+  },
+  "icons": {
+    "48": "iconkf.png",
+    "128": "iconkf.png"
+  }
+}
