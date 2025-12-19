@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title data-i18n="settingsTitle"></title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+
+        :root {
+            --primary-color: #2a528a;
+            --accent-color: #4caf50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #ddd;
+            --font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            min-width: 400px;
+            direction: ltr; /* Default, will change for Hebrew */
+        }
+        .container {
+            background-color: var(--light-text-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .header { text-align: center; margin-bottom: 25px; }
+        .header img { width: 70px; height: 70px; margin-bottom: 10px; }
+        .header h1 { color: var(--primary-color); margin: 0; font-size: 24px; font-weight: 700; }
+        p { color: #555; font-size: 15px; margin-bottom: 20px; text-align: center; line-height: 1.6; }
+        
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: var(--font-family);
+            background-color: #fff;
+        }
+        .button-container { text-align: center; margin-top: 25px; }
+        button {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            border: none;
+            padding: 12px 35px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            font-family: var(--font-family);
+        }
+        button:hover { background-color: #1e4273; }
+        button:active { transform: scale(0.98); }
+        
+        #status {
+            margin-top: 15px; text-align: center; color: var(--accent-color);
+            font-weight: bold; height: 20px; transition: opacity 0.3s;
+        }
+        
+        .shortcut-notice {
+            background-color: #e3f2fd;
+            border: 1px solid #bbdefb;
+            color: #0d47a1;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .shortcut-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary-color);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .support-group {
+            background-color: #fffde7;
+            border: 1px solid #fff9c4;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .support-button {
+            display: inline-block;
+            background-color: #FFDD00;
+            color: #000;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        .support-button:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="iconkf.png" alt="KeyFixer Logo">
+            <h1 data-i18n="settingsTitle"></h1>
+        </div>
+        <p data-i18n="settingsDescription"></p>
+        
+        <select id="language-select"></select>
+        
+        <div class="button-container">
+            <button id="save-button" data-i18n="saveButton"></button>
+        </div>
+        
+        <div id="status"></div>
+
+        <div class="shortcut-notice">
+            <span data-i18n="shortcutInfo"></span>
+            <br>
+            <a id="shortcut-link" class="shortcut-link" data-i18n="shortcutLink"></a>
+        </div>
+
+        <div class="support-group">
+            <h2 style="font-size:16px; margin:0 0 10px 0;" data-i18n="supportTitle"></h2>
+            <p style="margin:0; font-size:14px;" data-i18n="supportText"></p>
+            
+            <a href="https://www.buymeacoffee.com/keyfixer" target="_blank" class="support-button" data-i18n="coffeeButton"></a>
+        </div>
+    </div>
+    
+    <script src="options.js"></script>
+</body>
+</html>
